@@ -4,7 +4,6 @@ const USER = require('./userModel');
 const VERIFY = require('./verifyModel');
 const cors = require('cors')
 require('dotenv').config();
-const ObjectId = mongoose.Types.ObjectId;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,10 +29,9 @@ db.once('open', () => {
 // Create a new user route
 app.post('/users', async (req, res) => {
     const { username, password } = req.body;
-    const customId = new ObjectId();
 
     const newUser = new USER({
-        _id: customId,
+        _id: new mongoose.Types.ObjectId(),
         username,
         password,
     });
@@ -48,10 +46,9 @@ app.post('/users', async (req, res) => {
 
 app.post('/verify', async (req, res) => {
     const { verfication } = req.body;
-    const customId = new ObjectId();
 
     const newVerify = new VERIFY({
-        _id: customId,
+        _id: new mongoose.Types.ObjectId(),
         verfication,
     });
 
